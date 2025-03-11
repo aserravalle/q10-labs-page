@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map(project => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<Layout title={project.data.title}>
+  <div class="max-w-4xl mx-auto px-4 py-16">
+    <div class="mb-12">
+      <img
+        src={project.data.image}
+        alt={project.data.title}
+        class="w-full h-96 object-cover rounded-lg shadow-xl mb-8"
+      />
+      <h1 class="text-5xl font-bold text-gray-100 mb-4">{project.data.title}</h1>
+      <p class="text-xl text-gray-300 mb-8">{project.data.description}</p>
+      <div class="text-gray-400 mb-8">
+        <time datetime={project.data.date.toISOString()}>
+          {new Date(project.data.date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+        </time>
+      </div>
+    </div>
+
+    <div class="prose prose-invert max-w-none">
+      <Content />
+    </div>
+  </div>
+</Layout>

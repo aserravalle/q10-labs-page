@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects', ({ data }) => !data.hidden);
+// Sort projects by date in descending order
+const sortedProjects = projects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<Layout title="Past Projects">
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <h1 class="text-5xl font-bold text-gray-100 mb-12">Past Projects</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        sortedProjects.map((project) => (
+          <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700">
+            <img
+              src={project.data.image}
+              alt={project.data.title}
+              class="w-full h-64 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold mb-2 text-gray-100">{project.data.title}</h3>
+              <p class="text-gray-300 mb-4">{project.data.description}</p>
+              <a
+                href={`/projects/${project.slug}`}
+                class="text-blue-400 font-semibold hover:text-blue-300"
+              >
+                Read More →
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

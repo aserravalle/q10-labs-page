@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: 'Inter var', sans-serif;
+  }
+  
+  body {
+    @apply antialiased;
+  }
+}
+
+/* Swiper styles */
+.swiper-button-next,
+.swiper-button-prev {
+  @apply text-blue-500;
+}
+
+.swiper-pagination-bullet {
+  @apply bg-gray-400;
+}
+
+.swiper-pagination-bullet-active {
+  @apply bg-blue-500;
+}
