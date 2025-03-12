@@ -1,9 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
+import ProductCard from '../../components/ProductCard.astro';
 
 const products = await getCollection('products', ({ data }) => !data.hidden);
-// Sort products by date in descending order
 const sortedProducts = products.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 ---
 
@@ -13,43 +13,13 @@ const sortedProducts = products.sort((a, b) => b.data.date.getTime() - a.data.da
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
         sortedProducts.map((product) => (
-          <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700">
-            <img
-              src={product.data.image}
-              alt={product.data.title}
-              class="w-full h-64 object-cover"
-            />
-            <div class="p-6">
-              <h3 class="text-2xl font-bold mb-2 text-gray-100">{product.data.title}</h3>
-              <p class="text-gray-300 mb-4">{product.data.description}</p>
-              <div class="space-y-2">
-                {product.data.features.map((feature) => (
-                  <div class="flex items-center">
-                    <svg
-                      class="h-5 w-5 text-green-400 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span class="text-gray-300">{feature}</span>
-                  </div>
-                ))}
-              </div>
-              <a
-                href={`/products/${product.slug}`}
-                class="mt-4 inline-block text-blue-400 font-semibold hover:text-blue-300"
-              >
-                Learn More →
-              </a>
-            </div>
-          </div>
+          <ProductCard
+            title={product.data.title}
+            description={product.data.description}
+            image={product.data.image}
+            features={product.data.features}
+            slug={product.slug}
+          />
         ))
       }
     </div>

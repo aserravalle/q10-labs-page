@@ -48,6 +48,15 @@ const { Content } = await product.render();
           ))}
         </div>
       </div>
+
+      <div class="flex gap-4 mb-12">
+        <a
+          href={`/demo/${product.slug}`}
+          class="inline-block bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors"
+        >
+          Try Demo
+        </a>
+      </div>
     </div>
 
     <div class="prose prose-invert max-w-none">
