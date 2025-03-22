@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
 import ProductCard from '../../components/ProductCard.astro';
+import { getSortedAndFilteredContent } from '../../content/config';
 
-const products = await getCollection('products', ({ data }) => !data.hidden);
-const sortedProducts = products.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const products = await getSortedAndFilteredContent('products');
 ---
 
 <Layout title="Products">
@@ -12,14 +11,8 @@ const sortedProducts = products.sort((a, b) => b.data.date.getTime() - a.data.da
     <h1 class="text-5xl font-bold text-gray-100 mb-12">Our Products</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        sortedProducts.map((product) => (
-          <ProductCard
-            title={product.data.title}
-            description={product.data.description}
-            image={product.data.image}
-            features={product.data.features}
-            slug={product.slug}
-          />
+        products.map((product) => (
+        <ProductCard product={product} />
         ))
       }
     </div>

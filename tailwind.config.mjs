@@ -9,7 +9,12 @@ export default {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
-      typography: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.100')
+          },
+        },
         invert: {
           css: {
             '--tw-prose-body': 'var(--tw-prose-invert-body)',
@@ -33,7 +38,7 @@ export default {
             '--tw-prose-td-borders': 'var(--tw-prose-invert-td-borders)',
           },
         },
-      },
+      }),
     },
   },
   plugins: [
