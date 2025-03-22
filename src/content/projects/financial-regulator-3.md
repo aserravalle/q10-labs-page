@@ -1,7 +1,8 @@
 ---
 title: " 3 Industry Analysis for Financial Regulator"
 description: "See how we provided senior bank management with key insights into emerging technologies and potential risks using AI-powered analysis."
-image: "/images/financial-regulator.jpg"
+image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80"
+hidden: false
 date: 2024-01-15
 ---
 
