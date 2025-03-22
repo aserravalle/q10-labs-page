@@ -19,7 +19,7 @@ const navItems = [
       </div>
       
       <!-- Mobile menu button -->
-      <div class="flex items-center lg:hidden">
+      <div class="flex items-center md:hidden">
         <button id="mobile-menu-button" class="text-gray-300 hover:text-white">
           <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -28,12 +28,12 @@ const navItems = [
       </div>
 
       <!-- Desktop menu -->
-      <div class="hidden lg:flex lg:items-center">
+      <div class="hidden md:flex md:items-center">
         {
           navItems.map(({ href, text }) => (
             <a
               href={href}
-              class="ml-8 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+              class="ml-4 text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
             >
               {text}
             </a>
@@ -44,7 +44,7 @@ const navItems = [
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobile-menu" class="hidden lg:hidden">
+  <div id="mobile-menu" class="hidden md:hidden">
     <div class="px-2 pt-2 pb-3 space-y-1">
       {
         navItems.map(({ href, text }) => (
