@@ -1,23 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
 import Carousel from './Carousel.astro';
 import ProductCard from './ProductCard.astro';
+import { getSortedAndFilteredContent } from '../content/config';
 
-const products = await getCollection('products');
+const products = await getSortedAndFilteredContent('products');
 ---
 
 <Carousel id="products-carousel">
   {
     products.map((product) => (
       <div class="swiper-slide">
-        <ProductCard
-          title={product.data.title}
-          description={product.data.description}
-          image={product.data.image}
-          features={product.data.features}
-          slug={product.slug}
-          compact={true}
-        />
+        <ProductCard product={product} />
       </div>
     ))
   }

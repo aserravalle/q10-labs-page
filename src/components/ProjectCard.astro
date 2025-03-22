@@ -1,41 +1,28 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  image: string;
-  slug: string;
-  date?: Date;
-  compact?: boolean;
+import Card from './Card.astro';
+
+export interface Props {
+  project: {
+    data: {
+      title: string;
+      description: string;
+      image: string;
+      date?: Date;
+      compact?: boolean;
+    };
+    slug: string;
+  };
 }
 
-const { title, description, image, slug, date, compact = false } = Astro.props;
+const { project } = Astro.props;
+const { title, description, image, date } = project.data;
+const detailsPage = `/projects/${project.slug}`;
 ---
 
-<div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700">
-  <img
-    src={image}
-    alt={title}
-    class="w-full h-64 object-cover"
-  />
-  <div class="p-6">
-    <h3 class="text-2xl font-bold mb-2 text-gray-100">{title}</h3>
-    <p class="text-gray-300 mb-4">{description}</p>
-    {date && !compact && (
-      <div class="text-gray-400 mb-4">
-        <time datetime={date.toISOString()}>
-          {new Date(date).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
-      </div>
-    )}
-    <a
-      href={`/projects/${slug}`}
-      class="text-blue-400 font-semibold hover:text-blue-300"
-    >
-      Read More →
-    </a>
-  </div>
-</div>
+<Card
+  title={title}
+  description={description}
+  image={image}
+  detailsPage={detailsPage}
+  date={date}
+/>

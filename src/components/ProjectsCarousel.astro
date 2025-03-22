@@ -1,23 +1,16 @@
 ---
-import { getCollection } from 'astro:content';
 import Carousel from './Carousel.astro';
-import ProjectCard from './ProjectCard.astro';
+import ProjectCard from './../components/ProjectCard.astro';
+import { getSortedAndFilteredContent } from '../content/config';
 
-const projects = await getCollection('projects');
+const projects = await getSortedAndFilteredContent('projects');
 ---
 
 <Carousel id="projects-carousel">
   {
     projects.map((project) => (
       <div class="swiper-slide">
-        <ProjectCard
-          title={project.data.title}
-          description={project.data.description}
-          image={project.data.image}
-          slug={project.slug}
-          date={project.data.date}
-          compact={true}
-        />
+        <ProjectCard project={project} />
       </div>
     ))
   }

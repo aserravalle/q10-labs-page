@@ -1,60 +1,31 @@
 ---
-interface Props {
-  title: string;
-  description: string;
-  image: string;
-  features: string[];
-  slug: string;
-  compact?: boolean;
+import Card from './Card.astro';
+
+export interface Props {
+  product: {
+    data: {
+      title: string;
+      description: string;
+      image: string;
+      productLink: string;
+      features: string[];
+      date: Date;
+      compact?: boolean;
+    };
+    slug: string;
+  };
 }
 
-const { title, description, image, features, slug, compact = false } = Astro.props;
+const { product } = Astro.props;
+const { title, description, image, productLink, features, date } = product.data;
+const detailsPage = `/products/${product.slug}`;
 ---
 
-<div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-700">
-  <img
-    src={image}
-    alt={title}
-    class="w-full h-64 object-cover"
-  />
-  <div class="p-6">
-    <h3 class="text-2xl font-bold mb-2 text-gray-100">{title}</h3>
-    <p class="text-gray-300 mb-4">{description}</p>
-    {!compact && (
-      <div class="space-y-2">
-        {features.map((feature) => (
-          <div class="flex items-center">
-            <svg
-              class="h-5 w-5 text-green-400 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            <span class="text-gray-300">{feature}</span>
-          </div>
-        ))}
-      </div>
-    )}
-    <div class="mt-4 flex items-center gap-4">
-      <a
-        href={`/products/${slug}`}
-        class="inline-block text-blue-400 font-semibold hover:text-blue-300"
-      >
-        Learn More →
-      </a>
-      <a
-        href={`/demo/${slug}`}
-        class="inline-block text-green-400 font-semibold hover:text-green-300"
-      >
-        Try Demo →
-      </a>
-    </div>
-  </div>
-</div>
+<Card
+  title={title}
+  description={description}
+  image={image}
+  detailsPage={detailsPage}
+  productLink={productLink}
+  features={features}
+/>
